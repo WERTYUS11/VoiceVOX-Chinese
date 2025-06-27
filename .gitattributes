@@ -1,0 +1,6 @@
+src/openapi/**/* linguist-generated=true
+openapi.json linguist-generated=true
+**/__snapshots__/**/*.snap linguist-generated=true
+*.woff2 linguist-vendored=true
+* text=auto eol=lf
+voicevox_engine filter=lfs diff=lfs merge=lfs -text

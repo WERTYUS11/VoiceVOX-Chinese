@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "importHelpers": true,
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": ["vitest/globals"],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable"]
+  },
+  "include": [
+    "playwright.config.ts",
+    "*.mts",
+    "eslint-plugin/**/*.mts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.mts",
+    "tests/**/*.tsx",
+    "tools/**/*.mts",
+    ".storybook/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
