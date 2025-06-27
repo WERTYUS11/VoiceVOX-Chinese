@@ -3,11 +3,11 @@ name: Build and Deploy Electron App
 on:
   push:
     branches:
-      - main # 触发构建的分支，你可以根据需要修改
+      - main # Trigger build on push to main branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest # 可以更改为适合你的操作系统
+    runs-on: ubuntu-latest # You can change this to your preferred operating system
 
     steps:
       # Check out the repository
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22' # 使用 Node.js 的版本，可以根据你的项目要求修改
+          node-version: '16' # Adjust according to your Node.js version
 
       # Install dependencies (npm or pnpm)
       - name: Install dependencies
@@ -33,29 +33,29 @@ jobs:
       # Build Electron app
       - name: Build Electron App
         run: |
-          npm run electron:build # 假设你的 `package.json` 中有对应的构建命令
+          npm run electron:build # Adjust if needed based on your build command
 
-      # Upload the build artifacts
+      # Upload the build artifacts using v2
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: electron-build
-          path: ./dist_electron # 假设构建产物在 `dist` 文件夹中，你可以根据实际情况修改路径
-          
+          path: ./dist # Adjust based on the output folder of your Electron build
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: electron-build
 
-      # 上传构建产物到你的部署平台（例如使用 AWS S3，或者 GitHub Releases）
-      - name: Upload to S3 (示例)
+      # Example: Upload to S3 (adjust for your deployment platform)
+      - name: Upload to S3
         run: |
-          aws s3 cp ./dist s3://your-bucket-name/ --recursive # 根据需要修改为你使用的部署平台命令
+          aws s3 cp ./dist s3://your-bucket-name/ --recursive # Modify for your platform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
