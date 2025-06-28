@@ -1,14 +1,14 @@
 [
   {
-    "name": "dummy name1",
-    "version": "0.0.1",
-    "license": "dummy license1",
-    "text": "dummy text1"
+    "name": "LGPL_LICENSE",
+    "version": "3",
+    "license": "LGPL_LICENSE",
+    "text": "基于LGPL v3协议和不需要源代码发布的单独许可证的双许可证"
   },
   {
-    "name": "dummy name2",
-    "version": "0.0.2",
-    "license": "dummy license2",
-    "text": "dummy text2"
+    "name": "开源",
+    "version": "114514",
+    "license": "LGPL_LICENSE",
+    "text": "LGPL v3和不需要源代码发布的单独许可证的双许可证。如果您想获得另一个许可证，请询问hiho。X账号：@hiho_karuta"
   }
 ]

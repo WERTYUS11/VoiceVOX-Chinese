@@ -12,7 +12,7 @@
         <QHeader class="q-pa-sm">
           <QToolbar>
             <QToolbarTitle class="text-display"
-              >設定 / オプション</QToolbarTitle
+              >设置/选项</QToolbarTitle
             >
             <QSpace />
             <!-- close button -->
@@ -21,7 +21,7 @@
               flat
               icon="close"
               color="display"
-              aria-label="設定を閉じる"
+              aria-label="关闭设置"
               @click="settingDialogOpenedComputed = false"
             />
           </QToolbar>
@@ -32,7 +32,7 @@
               <!-- Engine Mode Card -->
               <div class="setting-card">
                 <div class="title-row">
-                  <h5 class="headline">エンジン</h5>
+                  <h5 class="headline">引擎</h5>
                   <template v-if="engineIds.length > 1">
                     <BaseSelect v-model="selectedEngineId">
                       <BaseSelectItem
@@ -47,13 +47,13 @@
                 <BaseTooltip
                   :label="
                     engineInfos[selectedEngineId].name +
-                    'はCPU版のためGPUモードを利用できません。'
+                    '不能使用GPU模式，您使用的是CPU版本'
                   "
                   :disabled="gpuSwitchEnabled(selectedEngineId)"
                 >
                   <ButtonToggleCell
-                    title="エンジンモード"
-                    description="GPU モードの利用には GPU が必要です。Linux は NVIDIA™ 製 GPU のみ対応しています。"
+                    title="引擎调整"
+                    description="使用GPU模式需要GPU。Linux仅支持NVIDIA™GPU。"
                     :options="engineUseGpuOptions"
                     :disable="!gpuSwitchEnabled(selectedEngineId)"
                     :modelValue="engineUseGpu ? 'GPU' : 'CPU'"
@@ -63,8 +63,8 @@
                   />
                 </BaseTooltip>
                 <SelectCell
-                  title="音声のサンプリングレート"
-                  description="再生・保存時の音声のサンプリングレートを変更できます（サンプリングレートを上げても音声の品質は上がりません）。"
+                  title="音频采样率"
+                  description="您可以更改播放/保存时音频的采样率（提高采样率不会提高音频质量）"
                   :modelValue="outputSamplingRate.toString()"
                   :options="
                     samplingRateOptions.map((option) => {
@@ -84,8 +84,8 @@
               <div class="setting-card">
                 <h5 class="headline">操作</h5>
                 <ToggleCell
-                  title="プリセット機能"
-                  description="ONの場合、プリセット機能を有効にします。パラメータを登録したり適用したりできます。"
+                  title="预设功能"
+                  description="打开时启用预设功能，您可以注册和应用参数。"
                   :modelValue="enablePreset"
                   @update:modelValue="changeEnablePreset"
                 />
@@ -93,8 +93,8 @@
                   <!-- q-slide-transitionはheightだけをアニメーションするのでdivで囲う -->
                   <div v-show="enablePreset" class="transition-container">
                     <ToggleCell
-                      title="スタイル変更時にデフォルトプリセットを適用"
-                      description="ONの場合、キャラやスタイルの変更時にデフォルトプリセットが自動的に適用されます。"
+                      title="更改样式时应用默认预设"
+                      description="打开时更改角色或样式时将自动应用默认预设"
                       class="in-slide-transition-workaround"
                       :modelValue="shouldApplyDefaultPresetOnVoiceChanged"
                       @update:modelValue="
@@ -104,15 +104,15 @@
                   </div>
                 </QSlideTransition>
                 <ToggleCell
-                  title="パラメータの引き継ぎ"
-                  description="ONの場合、テキスト欄追加の際に、現在の話速等のパラメータが引き継がれます。"
+                  title="参数继承"
+                  description="打开并添加文本栏时，将继承当前语速等参数"
                   :modelValue="inheritAudioInfoMode"
                   @update:modelValue="changeinheritAudioInfo"
                 />
                 <ButtonToggleCell
                   v-model="activePointScrollMode"
-                  title="再生位置を追従"
-                  description="音声再生中の、詳細調整欄の自動スクロールのモードを選べます。"
+                  title="跟踪播放位置"
+                  description="您可以选择播放音频时自动滚动详细信息栏的模式"
                   :options="[
                     {
                       label: '連続',
@@ -126,31 +126,31 @@
                         '現在の再生位置が表示範囲外にある場合にスクロールします。',
                     },
                     {
-                      label: 'オフ',
+                      label: '关闭',
                       value: 'OFF',
-                      description: '自動でスクロールしません。',
+                      description: '不自动滚动',
                     },
                   ]"
                 />
                 <ButtonToggleCell
-                  title="テキスト自動分割"
-                  description="テキスト貼り付けの際のテキストの分割箇所を選べます。"
+                  title="文本自动拆分"
+                  description="选择文本粘贴时的文本分割位置"
                   :modelValue="splitTextWhenPaste"
                   :options="[
                     {
-                      label: '句点と改行',
+                      label: '句号和换行',
                       value: 'PERIOD_AND_NEW_LINE',
-                      description: '句点と改行を基にテキストを分割します。',
+                      description: '根据句号和换行分割文本',
                     },
                     {
                       label: '改行',
                       value: 'NEW_LINE',
-                      description: '改行のみを基にテキストを分割します。',
+                      description: '仅使用换行符分割文本',
                     },
                     {
-                      label: 'オフ',
+                      label: '关闭',
                       value: 'OFF',
-                      description: '分割を行いません。',
+                      description: '不进行拆分',
                     },
                   ]"
                   @update:modelValue="
@@ -160,23 +160,23 @@
                   "
                 />
                 <ToggleCell
-                  title="メモ機能"
-                  description="ONの場合、テキストを [] で囲むことで、テキスト中にメモを書けます。"
+                  title="笔记"
+                  description="打开时可以用[]包围文本，在文本中记笔记笔记"
                   :modelValue="enableMemoNotation"
                   @update:modelValue="changeEnableMemoNotation"
                 />
                 <ToggleCell
-                  title="ルビ機能"
-                  description="ONの場合、テキストに {ルビ対象|よみかた} と書くことで、テキストの読み方を変えられます。"
+                  title="阳奉阴违"
+                  description="开启时可以通过在文本上写 {ルビ対象|よみかた} 来改变文本的读法"
                   :modelValue="enableRubyNotation"
                   @update:modelValue="changeEnableRubyNotation"
                 />
                 <BaseRowCard
-                  title="非表示にしたヒントを全て再表示"
-                  description="過去に非表示にしたヒントを全て再表示できます。"
+                  title="重新显示所有关闭的提示"
+                  description="您可以重新查看过去关闭的所有提示"
                 >
                   <BaseButton
-                    label="再表示する"
+                    label="重新显示"
                     :disabled="isDefaultConfirmedTips"
                     @click="
                       () => {
@@ -191,8 +191,8 @@
               <div class="setting-card">
                 <h5 class="headline">保存</h5>
                 <ToggleCell
-                  title="書き出し先を固定"
-                  description="ONの場合、書き出す際のフォルダをあらかじめ指定できます。"
+                  title="固定开头"
+                  description="启用时可以指定导出文件夹"
                   :modelValue="savingSetting.fixedExportEnabled"
                   @update:modelValue="
                     handleSavingSettingChange('fixedExportEnabled', $event)
@@ -205,11 +205,11 @@
                     v-show="savingSetting.fixedExportEnabled"
                     class="transition-container"
                   >
-                    <BaseRowCard title="書き出し先のフォルダ">
+                    <BaseRowCard title="导出文件夹">
                       {{ savingSetting.fixedExportDir }}
                       <BaseButton
                         icon="folder_open"
-                        label="フォルダ選択"
+                        label="文件夹选择"
                         @click="selectFixedExportDir()"
                       >
                       </BaseButton>
@@ -258,23 +258,23 @@
                 />
 
                 <EditButtonCell
-                  title="トーク：書き出しファイル名パターン"
-                  description="書き出す際のファイル名のパターンをカスタマイズできます。"
+                  title="Talk：导出文件名模式"
+                  description="您可以在导出时自定义文件名"
                   :currentValue="audioFileNamePatternWithExt"
                   @buttonClick="showAudioFilePatternEditDialog = true"
                 />
 
                 <ToggleCell
-                  title="上書き防止"
-                  description="ONの場合、書き出す際に同名ファイルが既にあったとき、ファイル名に連番を付けて別名で保存されます。"
+                  title="覆盖"
+                  description="打开时若有同名文件，则用编号来排序导出"
                   :modelValue="savingSetting.avoidOverwrite"
                   @update:modelValue="
                     handleSavingSettingChange('avoidOverwrite', $event)
                   "
                 />
                 <ButtonToggleCell
-                  title="文字コード"
-                  description="テキストファイルを書き出す際の文字コードを選べます。"
+                  title="字符编码"
+                  description="选择导出文本文件时的字符编码"
                   :modelValue="savingSetting.fileEncoding"
                   :options="[
                     { label: 'UTF-8', value: 'UTF-8' },
@@ -285,16 +285,16 @@
                   "
                 />
                 <ToggleCell
-                  title="txtファイルを書き出し"
-                  description="ONの場合、音声書き出しの際にテキストがtxtファイルとして書き出されます。"
+                  title="导出txt文件"
+                  description="打开时在音频文件导出时，txt一起导出"
                   :modelValue="savingSetting.exportText"
                   @update:modelValue="
                     handleSavingSettingChange('exportText', $event)
                   "
                 />
                 <ToggleCell
-                  title="labファイルを書き出し"
-                  description="ONの場合、音声書き出しの際にリップシンク用のlabファイルが書き出されます。"
+                  title="导出lab文件"
+                  description="开启时，导出音频会同时生成唇形同步的 lab 文件"
                   :modelValue="savingSetting.exportLab"
                   @update:modelValue="
                     handleSavingSettingChange('exportLab', $event)
@@ -302,42 +302,42 @@
                 />
 
                 <EditButtonCell
-                  title="ソング：トラックファイル名パターン"
-                  description="書き出す際のファイル名のパターンをカスタマイズできます。"
+                  title="歌曲：轨道文件名模式"
+                  description="您可以在导出时自定义文件名模式。"
                   :currentValue="songTrackFileNamePatternWithExt"
                   @buttonClick="showSongTrackAudioFilePatternEditDialog = true"
                 />
               </div>
               <!-- Theme Card -->
               <div class="setting-card">
-                <h5 class="headline">外観</h5>
+                <h5 class="headline">外观</h5>
                 <ButtonToggleCell
                   v-model="currentThemeNameComputed"
-                  title="テーマ"
-                  description="エディタの色を選べます。"
+                  title="主题"
+                  description="选择编辑器主色调"
                   :options="availableThemeNameComputed"
                 />
                 <ButtonToggleCell
-                  title="フォント"
-                  description="エディタのフォントを選べます。"
+                  title="字体"
+                  description="选择编辑器字体"
                   :modelValue="editorFont"
                   :options="[
-                    { label: 'デフォルト', value: 'default' },
-                    { label: 'OS標準', value: 'os' },
+                    { label: '默认值', value: 'default' },
+                    { label: '系统', value: 'os' },
                   ]"
                   @update:modelValue="
                     changeEditorFont($event as EditorFontType)
                   "
                 />
                 <ToggleCell
-                  title="行番号の表示"
-                  description="ONの場合、テキスト欄の左側に行番号が表示されます。"
+                  title="显示行号"
+                  description="打开时行号将显示在文本字段的左侧。"
                   :modelValue="showTextLineNumber"
                   @update:modelValue="changeShowTextLineNumber"
                 />
                 <ToggleCell
-                  title="テキスト追加ボタンの表示"
-                  description="OFFの場合、右下にテキスト追加ボタンが表示されません。（テキスト欄は Shift + Enter で追加できます）"
+                  title="显示文本添加按钮"
+                  description="关闭时右下角不会显示文本添加按钮。（文本栏可以使用Shift + Enter添加）"
                   :modelValue="showAddAudioItemButton"
                   @update:modelValue="changeShowAddAudioItemButton"
                 />
@@ -345,29 +345,29 @@
 
               <!-- Advanced Card -->
               <div class="setting-card">
-                <h5 class="headline">高度な設定</h5>
+                <h5 class="headline">高级设置</h5>
                 <ToggleCell
-                  title="マルチエンジン機能"
-                  description="ONの場合、複数のVOICEVOX準拠エンジンを利用可能にします。"
+                  title="多引擎功能"
+                  description="打开时就可使用多个VOICEVOX兼容引擎"
                   :modelValue="enableMultiEngine"
                   @update:modelValue="setEnableMultiEngine"
                 />
                 <ToggleCell
-                  title="音声をステレオ化"
-                  description="ONの場合、音声データがモノラルからステレオに変換されてから再生・保存が行われます。"
+                  title="立体声"
+                  description="打开时支持立体声"
                   :modelValue="savingSetting.outputStereo"
                   @update:modelValue="
                     handleSavingSettingChange('outputStereo', $event)
                   "
                 />
                 <BaseTooltip
-                  label="この機能はお使いの環境でサポートされていないため、使用できません。"
+                  label="此功能在您的环境中不受支持，因此不可用。"
                   :disabled="canSetAudioOutputDevice"
                 >
                   <SelectCell
                     v-model="currentAudioOutputDeviceComputed"
-                    title="再生デバイス"
-                    description="音声の再生デバイスを変更できます。"
+                    title="播放设备"
+                    description="您可以更改音频播放设备"
                     :disable="!canSetAudioOutputDevice"
                     :options="
                       availableAudioOutputDevices
@@ -380,8 +380,8 @@
                   </SelectCell>
                 </BaseTooltip>
                 <BaseRowCard
-                  title="ソング：元に戻すトラック操作"
-                  description="「元に戻す」機能の対象とするトラック操作を指定します。"
+                  title="唱歌：撤消轨道操作"
+                  description="指定用于“撤消”功能的轨道操作。"
                 >
                   <div class="checkbox-list">
                     <BaseCheckbox
@@ -403,11 +403,11 @@
 
               <!-- Experimental Card -->
               <div class="setting-card">
-                <h5 class="headline">実験的機能</h5>
+                <h5 class="headline">实验功能</h5>
                 <!-- 今後実験的機能を追加する場合はここに追加 -->
                 <ToggleCell
-                  title="疑問文を自動調整"
-                  description="ONの場合、疑問文の語尾の音高が自動的に上げられます。"
+                  title="自动调整疑问句"
+                  description="ON时，疑问句句尾的音高会自动提高"
                   :modelValue="experimentalSetting.enableInterrogativeUpspeak"
                   @update:modelValue="
                     changeExperimentalSetting(
@@ -417,16 +417,16 @@
                   "
                 />
                 <ToggleCell
-                  title="モーフィング機能"
-                  description="ONの場合、モーフィング機能を有効にします。2つの音声混ぜられるようになります。"
+                  title="变形功能"
+                  description="开启后变调功能生效，可将两种声音混在一起"
                   :modelValue="experimentalSetting.enableMorphing"
                   @update:modelValue="
                     changeExperimentalSetting('enableMorphing', $event)
                   "
                 />
                 <ToggleCell
-                  title="複数選択"
-                  description="ONの場合、複数のテキスト欄を選択できるようにします。"
+                  title="多选模式"
+                  description="开启后，可同时选中多个文本框"
                   :modelValue="experimentalSetting.enableMultiSelect"
                   @update:modelValue="
                     changeExperimentalSetting('enableMultiSelect', $event)
@@ -434,8 +434,8 @@
                 />
                 <ToggleCell
                   v-if="!isProduction"
-                  title="[開発時のみ機能] 調整結果の保持"
-                  description="ONの場合、テキスト変更時、同じ読みのアクセント区間内の調整結果を保持します。"
+                  title="[仅在开发功能]保留调整结果"
+                  description="开启时在文本更改时将保留相同读数重音区间内的调整"
                   :modelValue="experimentalSetting.shouldKeepTuningOnTextChange"
                   @update:modelValue="
                     changeExperimentalSetting(
@@ -446,8 +446,8 @@
                 />
                 <ToggleCell
                   v-if="!isProduction"
-                  title="[開発時のみ機能] ソング：パラメーターパネルの表示"
-                  description="ONの場合、ソングエディタでパラメーターパネルが表示されます。"
+                  title="[仅开发功能]歌曲：显示参数面板"
+                  description="开启时在歌曲编辑器显示参数面板。"
                   :modelValue="experimentalSetting.showParameterPanel"
                   @update:modelValue="
                     changeExperimentalSetting('showParameterPanel', $event)
@@ -455,10 +455,10 @@
                 />
               </div>
               <div class="setting-card">
-                <h5 class="headline">データ収集</h5>
+                <h5 class="headline">数据收集</h5>
                 <ToggleCell
-                  title="ソフトウェア利用状況のデータ収集を許可"
-                  description="ONの場合、各UIの利用率などのデータが送信され、VOICEVOXの改善に役立てられます。テキストデータや音声データは送信されません。"
+                  title="允许收集软件使用数据"
+                  description="打开时每个UI的利用率等数据将被发送，以帮助VOICEVOX改进（不会发送文本或语音数据）"
                   :modelValue="acceptRetrieveTelemetryComputed"
                   @update:modelValue="acceptRetrieveTelemetryComputed = $event"
                 />
@@ -553,8 +553,8 @@ const isDefaultConfirmedTips = computed(() => {
 
 // ソング：元に戻すトラック操作
 const undoableTrackOperationsLabels = {
-  soloAndMute: "ミュート・ソロ",
-  panAndGain: "パン・音量",
+  soloAndMute: "静音・独奏",
+  panAndGain: "声向・音量",
 };
 const undoableTrackOperations = computed({
   get: () => store.state.undoableTrackOperations,
@@ -672,9 +672,9 @@ const acceptRetrieveTelemetryComputed = computed({
     }
 
     void store.actions.SHOW_ALERT_DIALOG({
-      title: "ソフトウェア利用状況のデータ収集の無効化",
+      title: "禁用软件使用数据收集",
       message:
-        "ソフトウェア利用状況のデータ収集を完全に無効にするには、VOICEVOXを再起動する必要があります",
+        "要完全禁用软件使用数据收集，必须重新启动VOICEVOX",
       ok: "OK",
     });
   },
@@ -770,10 +770,10 @@ const outputSamplingRate = computed({
   set: async (outputSamplingRate: SamplingRateOption) => {
     if (outputSamplingRate !== "engineDefault") {
       const result = await store.actions.SHOW_CONFIRM_DIALOG({
-        title: "出力サンプリングレートを変更しますか？",
+        title: "要更改输出采样率吗？",
         message:
-          "出力サンプリングレートを変更しても、音質は変化しません。また、音声の生成処理に若干時間がかかる場合があります。",
-        actionName: "変更する",
+          "改变输出采样率不会改变音质，音频生成过程可能需要一些时间",
+        actionName: "更改",
       });
       if (result !== "OK") {
         return;
@@ -792,7 +792,7 @@ const outputSamplingRate = computed({
 
 const openFileExplore = () => {
   return window.backend.showSaveDirectoryDialog({
-    title: "書き出し先のフォルダを選択",
+    title: "选择要导出的文件夹",
   });
 };
 

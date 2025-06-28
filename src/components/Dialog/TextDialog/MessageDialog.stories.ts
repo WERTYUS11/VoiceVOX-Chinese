@@ -8,8 +8,8 @@ const meta: Meta<typeof MessageDialog> = {
   args: {
     type: "info",
     modelValue: true,
-    title: "タイトル",
-    message: "メッセージ",
+    title: "标题",
+    message: "信息",
 
     onOk: fn(),
   },
@@ -20,7 +20,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Opened: Story = {
-  name: "開いている",
+  name: "打开",
   args: {
     modelValue: true,
   },

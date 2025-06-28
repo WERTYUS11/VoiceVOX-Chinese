@@ -39,7 +39,7 @@ const isDialogOpenComputed = computed({
 // エディタのアップデート確認
 if (!import.meta.env.VITE_LATEST_UPDATE_INFOS_URL) {
   throw new Error(
-    "環境変数VITE_LATEST_UPDATE_INFOS_URLが設定されていません。.envに記載してください。",
+    "未设置环境变量VITE_LATEST_UPDATE_INFOS_URL。请在.env中注明。",
   );
 }
 

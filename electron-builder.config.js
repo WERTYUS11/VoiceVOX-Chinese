@@ -8,7 +8,7 @@ const dotenvPath = path.join(process.cwd(), ".env.production");
 dotenv.config({ path: dotenvPath });
 
 const VOICEVOX_ENGINE_DIR =
-  process.env.VOICEVOX_ENGINE_DIR ?? "../voicevox_engine";
+  process.env.VOICEVOX_ENGINE_DIR ?? "vv-engine";
 
 // ${productName} Web Setup ${version}.${ext}
 const NSIS_WEB_ARTIFACT_NAME = process.env.NSIS_WEB_ARTIFACT_NAME;
@@ -59,7 +59,7 @@ const builderOptions = {
     output: "dist_electron",
     buildResources: "build",
   },
-  files: ["dist/**/*", "package.json", "voicevox_engine/*"],  // 确保包含引擎文件
+  files: ["dist/**/*", "package.json", "vv-engine/*"],  // 确保包含引擎文件
   fileAssociations: [
     {
       ext: "vvproj",
@@ -90,7 +90,7 @@ const builderOptions = {
     },
     {
       from: VOICEVOX_ENGINE_DIR,
-      to: "voicevox_engine",  // 将文件复制到根目录下
+      to: "vv-engine",  // 将文件复制到根目录下
     },
     {
       from: path.resolve(__dirname, "vendored", "7z", sevenZipFile),
@@ -100,7 +100,7 @@ const builderOptions = {
   // electron-builder installer
   productName: "VOICEVOX",
   appId: "jp.hiroshiba.voicevox",
-  copyright: "Hiroshiba Kazuyuki",
+  copyright: "Hiroshiba Kazuyuki & WERTYUS11",
   afterAllArtifactBuild: path.resolve(
     __dirname,
     "build",
