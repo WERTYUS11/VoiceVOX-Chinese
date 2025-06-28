@@ -17,7 +17,7 @@ jobs:
         uses: actions/upload-artifact@v4.6.2
         with:
           name: Upload-File-${{ env.VERSION }}  # 加上版本号，防止重复
-          path: ./dist_electron/nsis/VOICEVOX-Web-Setup-${{ env.VERSION }}.exe  # 修复文件名，去掉空格和多余连字符
+          path: ./dist_electron/nsis-web/VOICEVOX Web-Setup ${{ env.VERSION }}.exe  # 修复文件名，去掉空格和多余连字符
           if-no-files-found: error  # 文件没找到就报错
           retention-days: 7  # 保留 7 天
           compression-level: 6  # 默认压缩
@@ -28,9 +28,7 @@ jobs:
         with:
           name: voicevox-release-files-${{ env.VERSION }}
           path: |
-            dist_electron/nsis-web/latest.yml
             dist_electron/nsis-web/voicevox-${{ env.VERSION }}-x64.nsis.7z
-            dist_electron/nsis-web/out/voicevox-${{ env.VERSION }}-x64.nsis.7z.*
           if-no-files-found: error
           retention-days: 7
           compression-level: 6
@@ -62,8 +60,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/VOICEVOX-Web-Setup-${{ env.VERSION }}.exe
-          asset_name: VOICEVOX-Web-Setup-${{ env.VERSION }}.exe
+          asset_path: artifacts/VOICEVOX-Web-Setup ${{ env.VERSION }}.exe
+          asset_name: VOICEVOX-Web-Setup ${{ env.VERSION }}.exe
           asset_content_type: application/x-msdownload
       - name: Upload .7z
         uses: actions/upload-release-asset@v1
@@ -71,8 +69,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/voicevox-${{ env.VERSION }}-x64.nsis.7z
-          asset_name: voicevox-${{ env.VERSION }}-x64.nsis.7z
+          asset_path: artifacts/voicevox-${{ env.VERSION }}-x64.nsis.7z.1
+          asset_name: voicevox-${{ env.VERSION }}-x64.nsis.7z.1
           asset_content_type: application/x-7z-compressed
       - name: Upload .7z split files
         uses: actions/upload-release-asset@v1
@@ -80,6 +78,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/voicevox-${{ env.VERSION }}-x64.nsis.7z.*
-          asset_name: voicevox-${{ env.VERSION }}-x64.nsis.7z.*
+          asset_path: artifacts/voicevox-${{ env.VERSION }}-x64.nsis.7z.0
+          asset_name: voicevox-${{ env.VERSION }}-x64.nsis.7z.0
+          asset_content_type: application/octet-stream
+      - name: Upload .ini
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/voicevox-${{ env.VERSION }}-x64.nsis.7z.ini
+          asset_name: voicevox-${{ env.VERSION }}-x64.nsis.7z.ini
           asset_content_type: application/octet-stream
